@@ -12,11 +12,11 @@ await invokeDenoNodeJSTransformer({
 		{
 			executable: true,
 			name: "adler32",
-			path: "./cli.ts"
+			path: "cli.ts"
 		},
 		{
 			name: ".",
-			path: "./mod.ts"
+			path: "mod.ts"
 		}
 	],
 	generateDeclarationMap: true,
