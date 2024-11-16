@@ -80,6 +80,8 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
 
 ## 🧩 CLIs
 
+**Entrypoint:** `cli.js`/`cli.ts`
+
 - From argument; Output hex padding
   ```ps1
   adler32 {Data}
