@@ -86,7 +86,7 @@ export class Adler32 {
 	 * @returns {Promise<Adler32>}
 	 */
 	static async fromFile(filePath: string | URL): Promise<Adler32> {
-		return new Adler32(await Deno.readFile(filePath));
+		return new this(await Deno.readFile(filePath));
 	}
 	/**
 	 * Initialize from file, synchronously.
@@ -94,7 +94,7 @@ export class Adler32 {
 	 * @returns {Adler32}
 	 */
 	static fromFileSync(filePath: string | URL): Adler32 {
-		return new Adler32(Deno.readFileSync(filePath));
+		return new this(Deno.readFileSync(filePath));
 	}
 }
 export default Adler32;
