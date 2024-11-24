@@ -8,23 +8,23 @@ const args = parseArgs(Deno.args, {
 });
 const fromFile: boolean = args.file;
 const fromStdin: boolean = args.stdin;
-const values: string[] = args._.map((value: string | number): string => {
+const argsValues: string[] = args._.map((value: string | number): string => {
 	return String(value);
 });
 if (fromFile && fromStdin) {
 	throw new SyntaxError(`Unable to use the sources of file and stdin together!`);
 }
 if (fromFile) {
-	if (values.length === 0) {
+	if (argsValues.length === 0) {
 		throw new SyntaxError(`File path is not defined!`);
 	}
-	if (values.length !== 1) {
-		throw new SyntaxError(`Too many arguments! Expect: 1; Current: ${values.length}.`);
+	if (argsValues.length !== 1) {
+		throw new SyntaxError(`Too many arguments! Expect: 1; Current: ${argsValues.length}.`);
 	}
-	console.log((await Adler32.fromFile(values[0])).hashHexPadding());
+	console.log((await Adler32.fromFile(argsValues[0])).hashHexPadding());
 } else if (fromStdin) {
-	if (values.length !== 0) {
-		throw new SyntaxError(`Too many arguments! Expect: 0; Current: ${values.length}.`);
+	if (argsValues.length !== 0) {
+		throw new SyntaxError(`Too many arguments! Expect: 0; Current: ${argsValues.length}.`);
 	}
 	const stdinReader: ReadableStreamDefaultReader<Uint8Array> = Deno.stdin.readable.getReader();
 	const instance: Adler32 = new Adler32();
@@ -40,11 +40,11 @@ if (fromFile) {
 	}
 	console.log(instance.hashHexPadding());
 } else {
-	if (values.length === 0) {
+	if (argsValues.length === 0) {
 		throw new SyntaxError(`Data is not defined!`);
 	}
-	if (values.length !== 1) {
-		throw new SyntaxError(`Too many arguments! Expect: 1; Current: ${values.length}.`);
+	if (argsValues.length !== 1) {
+		throw new SyntaxError(`Too many arguments! Expect: 1; Current: ${argsValues.length}.`);
 	}
-	console.log(new Adler32(values[0]).hashHexPadding());
+	console.log(new Adler32(argsValues[0]).hashHexPadding());
 }
