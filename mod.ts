@@ -82,6 +82,11 @@ export class Adler32 {
 	}
 	/**
 	 * Initialize from file, asynchronously.
+	 * 
+	 * > **🛡️ Runtime Permissions**
+	 * > 
+	 * > - File System - Read \[Deno: `read`; NodeJS (>= v20.9.0) 🧪: `fs-read`\]
+	 * >   - *Resources*
 	 * @param {string | URL} filePath Path of the file.
 	 * @returns {Promise<Adler32>}
 	 */
@@ -90,6 +95,11 @@ export class Adler32 {
 	}
 	/**
 	 * Initialize from file, synchronously.
+	 * 
+	 * > **🛡️ Runtime Permissions**
+	 * > 
+	 * > - File System - Read \[Deno: `read`; NodeJS (>= v20.9.0) 🧪: `fs-read`\]
+	 * >   - *Resources*
 	 * @param {string | URL} filePath Path of the file.
 	 * @returns {Adler32}
 	 */
