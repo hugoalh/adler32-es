@@ -9,14 +9,11 @@ await invokeDenoNodeJSTransformer({
 		"README.md"
 	],
 	entrypoints: [
+		...configJSR.getExports(),
 		{
 			executable: true,
 			name: "adler32",
-			path: "cli.ts"
-		},
-		{
-			name: ".",
-			path: "mod.ts"
+			path: "./cli.ts"
 		}
 	],
 	generateDeclarationMap: true,
