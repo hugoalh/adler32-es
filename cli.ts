@@ -4,7 +4,10 @@ if (!import.meta.main) {
 	throw new Error(`This script is for command line usage only!`);
 }
 const args = parseArgs(Deno.args, {
-	boolean: ["file", "stdin"],
+	boolean: [
+		"file",
+		"stdin"
+	]
 });
 const fromFile: boolean = args.file;
 const fromStdin: boolean = args.stdin;
