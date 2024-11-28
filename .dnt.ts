@@ -4,7 +4,7 @@ import {
 } from "DNT";
 const configJSR = await getMetadataFromConfig("jsr.jsonc");
 await invokeDenoNodeJSTransformer({
-	assetsCopy: [
+	copyAssets: [
 		"LICENSE.md",
 		"README.md"
 	],
@@ -16,6 +16,7 @@ await invokeDenoNodeJSTransformer({
 			path: "./cli.ts"
 		}
 	],
+	fixInjectedImports: true,
 	generateDeclarationMap: true,
 	metadata: {
 		name: configJSR.getName(),
