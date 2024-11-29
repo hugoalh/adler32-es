@@ -30,7 +30,7 @@ if (fromFile) {
 		throw new SyntaxError(`Too many arguments! Expect: 0; Current: ${argsValues.length}.`);
 	}
 	const stdinReader: ReadableStreamDefaultReader<Uint8Array> = Deno.stdin.readable.getReader();
-	const instance: Adler32 = new Adler32();
+	let data: Uint8Array = Uint8Array.from([]);
 	while (true) {
 		const {
 			done,
@@ -39,9 +39,9 @@ if (fromFile) {
 		if (done) {
 			break;
 		}
-		instance.update(value);
+		data = Uint8Array.from([...data, ...value]);
 	}
-	console.log(instance.hashHexPadding());
+	console.log(new Adler32(new TextDecoder().decode(data).replace(/\r?\n$/, "")).hashHexPadding());
 } else {
 	if (argsValues.length === 0) {
 		throw new SyntaxError(`Data is not defined!`);
