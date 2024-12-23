@@ -1,4 +1,4 @@
-import { parseArgs } from "jsr:@std/cli@^1.0.6/parse-args";
+import { parseArgs } from "jsr:@std/cli@^1.0.8/parse-args";
 import { Adler32 } from "./mod.ts";
 if (!import.meta.main) {
 	throw new Error(`This script is for command line usage only!`);
