@@ -21,7 +21,7 @@ export class Adler32 {
 	 */
 	hash(): bigint {
 		if (this.#hash === null) {
-			this.#hash = (this.#b % 65521n) * 65536n + this.#a % 65521n;
+			this.#hash = this.#b * 65536n + this.#a;
 		}
 		return this.#hash;
 	}
@@ -75,8 +75,8 @@ export class Adler32 {
 	update(data: Adler32AcceptDataType): this {
 		this.#hash = null;
 		for (const byte of new Uint32Array((typeof data === "string") ? new TextEncoder().encode(data) : data)) {
-			this.#a += BigInt(byte);
-			this.#b += this.#a;
+			this.#a = (this.#a + BigInt(byte)) % 65521n;
+			this.#b = (this.#b + this.#a) % 65521n;
 		}
 		return this;
 	}
