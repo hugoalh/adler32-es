@@ -68,10 +68,11 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
     update(data: Adler32AcceptDataType): this;
     static fromFile(filePath: string | URL): Promise<Adler32>;
     static fromFileSync(filePath: string | URL): Adler32;
+    static fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32>;
   }
   ```
 - ```ts
-  type Adler32AcceptDataType = string | ArrayBuffer | BigInt64Array | BigUint64Array | Int8Array | Int16Array | Int32Array | Uint8Array | Uint16Array | Uint32Array;
+  type Adler32AcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
   ```
 
 > [!NOTE]
