@@ -1,4 +1,4 @@
-export type Adler32AcceptDataType = string | ArrayBuffer | BigInt64Array | BigUint64Array | Int8Array | Int16Array | Int32Array | Uint8Array | Uint16Array | Uint32Array;
+export type Adler32AcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
 /**
  * Get the checksum of the data with algorithm Adler32.
  */
@@ -74,7 +74,7 @@ export class Adler32 {
 	 */
 	update(data: Adler32AcceptDataType): this {
 		this.#hash = null;
-		for (const byte of new Uint32Array((typeof data === "string") ? new TextEncoder().encode(data) : data)) {
+		for (const byte of ((typeof data === "string") ? new TextEncoder().encode(data) : data)) {
 			this.#a = (this.#a + BigInt(byte)) % 65521n;
 			this.#b = (this.#b + this.#a) % 65521n;
 		}
@@ -91,7 +91,8 @@ export class Adler32 {
 	 * @returns {Promise<Adler32>}
 	 */
 	static async fromFile(filePath: string | URL): Promise<Adler32> {
-		return new this(await Deno.readFile(filePath));
+		using file: Deno.FsFile = await Deno.open(filePath);
+		return await Adler32.fromStream(file.readable);
 	}
 	/**
 	 * Initialize from file, synchronously.
@@ -105,6 +106,18 @@ export class Adler32 {
 	 */
 	static fromFileSync(filePath: string | URL): Adler32 {
 		return new this(Deno.readFileSync(filePath));
+	}
+	/**
+	 * Initialize from readable stream, asynchronously.
+	 * @param {ReadableStream<Adler32AcceptDataType>} stream Readable stream.
+	 * @returns {Promise<Adler32>}
+	 */
+	static async fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32> {
+		const instance: Adler32 = new Adler32();
+		for await (const chunk of stream) {
+			instance.update(chunk);
+		}
+		return instance;
 	}
 }
 export default Adler32;
