@@ -1,4 +1,4 @@
-export type Adler32AcceptDataType = string | Uint8Array | Uint16Array | Uint32Array;
+export type Adler32AcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
 /**
  * Get the checksum of the data with algorithm Adler32.
  */
