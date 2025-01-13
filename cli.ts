@@ -29,17 +29,9 @@ if (fromFile) {
 	if (argsValues.length !== 0) {
 		throw new SyntaxError(`Too many arguments! Expect: 0; Current: ${argsValues.length}.`);
 	}
-	const stdinReader: ReadableStreamDefaultReader<Uint8Array> = Deno.stdin.readable.getReader();
 	let data: Uint8Array = Uint8Array.from([]);
-	while (true) {
-		const {
-			done,
-			value
-		}: ReadableStreamReadResult<Uint8Array> = await stdinReader.read();
-		if (done) {
-			break;
-		}
-		data = Uint8Array.from([...data, ...value]);
+	for await (const chunk of Deno.stdin.readable) {
+		data = Uint8Array.from([...data, ...chunk]);
 	}
 	console.log(new Adler32(new TextDecoder().decode(data).replace(/\r?\n$/, "")).hashHexPadding());
 } else {
