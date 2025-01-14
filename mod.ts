@@ -92,7 +92,7 @@ export class Adler32 {
 	 */
 	static async fromFile(filePath: string | URL): Promise<Adler32> {
 		using file: Deno.FsFile = await Deno.open(filePath);
-		return await Adler32.fromStream(file.readable);
+		return await this.fromStream(file.readable);
 	}
 	/**
 	 * Initialize from file, synchronously.
@@ -113,7 +113,7 @@ export class Adler32 {
 	 * @returns {Promise<Adler32>}
 	 */
 	static async fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32> {
-		const instance: Adler32 = new Adler32();
+		const instance: Adler32 = new this();
 		for await (const chunk of stream) {
 			instance.update(chunk);
 		}
