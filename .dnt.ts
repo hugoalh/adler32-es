@@ -23,7 +23,8 @@ await invokeDenoNodeJSTransformer({
 		version: configJSR.getVersion(),
 		description: "A CLI and module to get the checksum of the data with algorithm Adler32.",
 		keywords: [
-			"adler32"
+			"adler32",
+			"checksum"
 		],
 		homepage: "https://github.com/hugoalh/adler32-es#readme",
 		bugs: {

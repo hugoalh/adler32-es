@@ -16,7 +16,7 @@ export class Adler32 {
 		}
 	}
 	/**
-	 * Get the checksum of the data, in big integer.
+	 * Get the checksum of the data, in original format.
 	 * @returns {bigint}
 	 */
 	hash(): bigint {
@@ -46,6 +46,18 @@ export class Adler32 {
 	hashBase36(): string {
 		return this.hashNumber().toString(36).toUpperCase();
 	}
+	/**
+	 * Get the checksum of the data, in big integer.
+	 * @returns {bigint}
+	 */
+	hashBigInt(): bigint {
+		return this.hash();
+	}
+	/**
+	 * Get the checksum of the data, in big integer.
+	 * @returns {bigint}
+	 */
+	hashBigInteger: () => bigint = this.hashBigInt;
 	/**
 	 * Get the checksum of the data, in hex/hexadecimal without padding.
 	 * @returns {string}

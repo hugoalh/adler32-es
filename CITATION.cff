@@ -8,6 +8,7 @@ authors:
 repository-code: "https://github.com/hugoalh/adler32-es"
 keywords:
   - "adler32"
+  - "checksum"
   - "es"
   - "javascript"
   - "js"

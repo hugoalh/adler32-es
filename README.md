@@ -62,6 +62,7 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
     hashBase16(): string;
     hashBase32Hex(): string;
     hashBase36(): string;
+    hashBigInt(): bigint;
     hashHex(): string;
     hashHexPadding(): string;
     hashNumber(): number;
