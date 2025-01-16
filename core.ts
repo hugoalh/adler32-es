@@ -114,5 +114,17 @@ export class Adler32 {
 		}
 		return this;
 	}
+	/**
+	 * Initialize from the readable stream, asynchronously.
+	 * @param {ReadableStream<Adler32AcceptDataType>} stream Readable stream.
+	 * @returns {Promise<Adler32>}
+	 */
+	static async fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32> {
+		const instance: Adler32 = new this();
+		for await (const chunk of stream) {
+			instance.update(chunk);
+		}
+		return instance;
+	}
 }
 export default Adler32;

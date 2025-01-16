@@ -5,6 +5,5 @@ export {
 } from "./core.ts";
 export {
 	adler32FromFile,
-	adler32FromFileSync,
-	adler32FromStream
+	adler32FromFileSync
 } from "./wrapper.ts";
