@@ -69,6 +69,7 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
     hashHexPadding(): string;
     hashNumber(): number;
     update(data: Adler32AcceptDataType): this;
+    static fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32>;
   }
   ```
 - ```ts
