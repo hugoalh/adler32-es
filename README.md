@@ -58,6 +58,8 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
 - ```ts
   class Adler32 {
     constructor(data?: Adler32AcceptDataType);
+    freeze(): this;
+    get freezed(): boolean;
     hash(): bigint;
     hashBase16(): string;
     hashBase32Hex(): string;
@@ -67,9 +69,6 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
     hashHexPadding(): string;
     hashNumber(): number;
     update(data: Adler32AcceptDataType): this;
-    static fromFile(filePath: string | URL): Promise<Adler32>;
-    static fromFileSync(filePath: string | URL): Adler32;
-    static fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32>;
   }
   ```
 - ```ts
