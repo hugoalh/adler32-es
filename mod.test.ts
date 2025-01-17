@@ -33,6 +33,6 @@ Deno.test("Stream 1", {
 		read: true
 	}
 }, async () => {
-	using file: Deno.FsFile = await Deno.open("./README.md");
+	using file = await Deno.open("./README.md");
 	console.log((await Adler32.fromStream(file.readable)).hashHexPadding());
 });
