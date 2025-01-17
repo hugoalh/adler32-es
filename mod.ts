@@ -20,19 +20,19 @@ export class Adler32 {
 		}
 	}
 	/**
+	 * Whether the instance is freezed.
+	 * @returns {boolean}
+	 */
+	get freezed(): boolean {
+		return this.#freezed;
+	}
+	/**
 	 * Freeze the instance to prevent any update.
 	 * @returns {this}
 	 */
 	freeze(): this {
 		this.#freezed = true;
 		return this;
-	}
-	/**
-	 * Whether the instance is freezed.
-	 * @returns {boolean}
-	 */
-	get freezed(): boolean {
-		return this.#freezed;
 	}
 	/**
 	 * Get the checksum of the data, in original format.

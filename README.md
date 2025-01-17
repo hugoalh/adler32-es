@@ -58,8 +58,8 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
 - ```ts
   class Adler32 {
     constructor(data?: Adler32AcceptDataType);
-    freeze(): this;
     get freezed(): boolean;
+    freeze(): this;
     hash(): bigint;
     hashBase16(): string;
     hashBase32Hex(): string;
