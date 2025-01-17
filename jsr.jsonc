@@ -4,8 +4,6 @@
 	"version": "0.3.0",
 	"exports": {
 		"./cli": "./cli.ts",
-		"./core": "./core.ts",
-		"./wrapper": "./wrapper.ts",
 		".": "./mod.ts"
 	},
 	"imports": {
