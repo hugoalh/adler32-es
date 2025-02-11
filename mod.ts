@@ -115,7 +115,7 @@ export class Adler32 {
 		return this;
 	}
 	/**
-	 * Initialize from the readable stream, asynchronously.
+	 * Initialize from the readable stream.
 	 * @param {ReadableStream<Adler32AcceptDataType>} stream Readable stream.
 	 * @returns {Promise<Adler32>}
 	 */
