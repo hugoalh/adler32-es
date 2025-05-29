@@ -6,18 +6,17 @@
 [![JSR: @hugoalh/adler32](https://img.shields.io/jsr/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/adler32")](https://jsr.io/@hugoalh/adler32)
 [![NPM: @hugoalh/adler32](https://img.shields.io/npm/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/adler32")](https://www.npmjs.com/package/@hugoalh/adler32)
 
-An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data with algorithm Adler32.
+An ECMAScript (JavaScript & TypeScript) CLI and module to get the checksum of the data with algorithm Adler32.
 
 ## 🔰 Begin
 
 ### 🎯 Targets
 
-|  | **Remote** | **JSR** | **NPM** |
-|:--|:--|:--|:--|
-| **[Bun](https://bun.sh/)** >= v1.1.0 | ❌ | ❓ | ✔️ |
-| **[Cloudflare Workers](https://workers.cloudflare.com/)** | ❌ | ❓ | ✔️ |
-| **[Deno](https://deno.land/)** >= v1.42.0 | ✔️ | ✔️ | ✔️ |
-| **[NodeJS](https://nodejs.org/)** >= v16.13.0 | ❌ | ❓ | ✔️ |
+| **Targets** | **Remote** | **JSR** | **NPM** |
+|:--|:-:|:-:|:-:|
+| **[Bun](https://bun.sh/)** >= v1.1.0 | ❌ | ✔️ | ✔️ |
+| **[Deno](https://deno.land/)** >= v2.1.0 | ✔️ | ✔️ | ✔️ |
+| **[NodeJS](https://nodejs.org/)** >= v20.9.0 | ❌ | ✔️ | ✔️ |
 
 > [!NOTE]
 > - It is possible to use this module in other methods/ways which not listed in here, however those methods/ways are not officially supported, and should beware maybe cause security issues.
@@ -50,7 +49,7 @@ An ES (JavaScript & TypeScript) CLI and module to get the checksum of the data w
 
 ### 🛡️ Runtime Permissions
 
-- File System - Read \[Deno: `read`; NodeJS (>= v20.9.0) 🧪: `fs-read`\]
+- **File System - Read (Deno: `read`; NodeJS: `fs-read`):**
   - *Resources* (Optional)
 
 ## 🧩 APIs
