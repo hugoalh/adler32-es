@@ -3,7 +3,6 @@
 	"name": "@hugoalh/adler32",
 	"version": "0.3.0",
 	"exports": {
-		"./cli": "./cli.ts",
 		".": "./mod.ts"
 	},
 	"imports": {

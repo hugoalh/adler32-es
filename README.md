@@ -6,7 +6,7 @@
 [![JSR: @hugoalh/adler32](https://img.shields.io/jsr/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/adler32")](https://jsr.io/@hugoalh/adler32)
 [![NPM: @hugoalh/adler32](https://img.shields.io/npm/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/adler32")](https://www.npmjs.com/package/@hugoalh/adler32)
 
-An ECMAScript (JavaScript & TypeScript) CLI and module to get the checksum of the data with algorithm Adler32.
+An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data with algorithm Adler32.
 
 ## 🔰 Begin
 
@@ -79,23 +79,6 @@ An ECMAScript (JavaScript & TypeScript) CLI and module to get the checksum of th
 > - For the full or prettier documentation, can visit via:
 >   - [Deno CLI `deno doc`](https://docs.deno.com/runtime/reference/cli/documentation_generator/)
 >   - [JSR](https://jsr.io/@hugoalh/adler32)
-
-## 🧩 CLIs
-
-**Entrypoint:** `cli.js`/`cli.ts`
-
-- From argument; Output hex padding
-  ```ps1
-  adler32 {Data}
-  ```
-- From file; Output hex padding
-  ```ps1
-  adler32 --file {FilePath}
-  ```
-- From stdin; Output hex padding
-  ```ps1
-  adler32 --stdin
-  ```
 
 ## ✍️ Examples
 
