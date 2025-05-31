@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 export type Adler32AcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
 /**
  * Get the checksum of the data with algorithm Adler32.
@@ -8,6 +9,11 @@ export class Adler32 {
 	}
 	#freezed: boolean = false;
 	#hash: bigint | null = null;
+	#hashBase16: string | null = null;
+	#hashBase32Hex: string | null = null;
+	#hashBase36: string | null = null;
+	#hashBase64: string | null = null;
+	#hashBase64URL: string | null = null;
 	#a: bigint = 1n;
 	#b: bigint = 0n;
 	/**
@@ -18,6 +24,17 @@ export class Adler32 {
 		if (typeof data !== "undefined") {
 			this.update(data);
 		}
+	}
+	#clearStorage(): void {
+		if (this.#freezed) {
+			throw new Error(`Instance is freezed!`);
+		}
+		this.#hash = null;
+		this.#hashBase16 = null;
+		this.#hashBase32Hex = null;
+		this.#hashBase36 = null;
+		this.#hashBase64 = null;
+		this.#hashBase64URL = null;
 	}
 	/**
 	 * Whether the instance is freezed.
@@ -39,9 +56,7 @@ export class Adler32 {
 	 * @returns {bigint}
 	 */
 	hash(): bigint {
-		if (this.#hash === null) {
-			this.#hash = this.#b * 65536n + this.#a;
-		}
+		this.#hash ??= this.#b * 65536n + this.#a;
 		return this.#hash;
 	}
 	/**
@@ -49,21 +64,40 @@ export class Adler32 {
 	 * @returns {string}
 	 */
 	hashBase16(): string {
-		return this.hashBigInt().toString(16).toUpperCase();
+		this.#hashBase16 ??= this.hashBigInt().toString(16).toUpperCase();
+		return this.#hashBase16;
 	}
 	/**
 	 * Get the checksum of the data, in Base32Hex ({@link https://datatracker.ietf.org/doc/html/rfc4648#section-7 RFC 4648 §7}).
 	 * @returns {string}
 	 */
 	hashBase32Hex(): string {
-		return this.hashBigInt().toString(32).toUpperCase();
+		this.#hashBase32Hex ??= this.hashBigInt().toString(32).toUpperCase();
+		return this.#hashBase32Hex;
 	}
 	/**
 	 * Get the checksum of the data, in Base36.
 	 * @returns {string}
 	 */
 	hashBase36(): string {
-		return this.hashBigInt().toString(36).toUpperCase();
+		this.#hashBase36 ??= this.hashBigInt().toString(36).toUpperCase();
+		return this.#hashBase36;
+	}
+	/**
+	 * Get the checksum of the data, in Base64.
+	 * @returns {string}
+	 */
+	hashBase64(): string {
+		this.#hashBase64 ??= Buffer.from(this.hashBase16(), "hex").toString("base64");
+		return this.#hashBase64;
+	}
+	/**
+	 * Get the checksum of the data, in Base64URL.
+	 * @returns {string}
+	 */
+	hashBase64URL(): string {
+		this.#hashBase64URL ??= Buffer.from(this.hashBase16(), "hex").toString("base64url");
+		return this.#hashBase64URL;
 	}
 	/**
 	 * Get the checksum of the data, in big integer.
@@ -104,10 +138,7 @@ export class Adler32 {
 	 * @returns {this}
 	 */
 	update(data: Adler32AcceptDataType): this {
-		if (this.#freezed) {
-			throw new Error(`Instance is freezed!`);
-		}
-		this.#hash = null;
+		this.#clearStorage();
 		for (const byte of ((typeof data === "string") ? new TextEncoder().encode(data) : data)) {
 			this.#a = (this.#a + BigInt(byte)) % 65521n;
 			this.#b = (this.#b + this.#a) % 65521n;
