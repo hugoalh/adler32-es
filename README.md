@@ -49,8 +49,7 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
 
 ### 🛡️ Runtime Permissions
 
-- **File System - Read (Deno: `read`; NodeJS: `fs-read`):**
-  - *Resources* (Optional)
+*This module does not request any runtime permission.*
 
 ## 🧩 APIs
 
