@@ -88,7 +88,7 @@ export class Adler32 {
 	 * @returns {string}
 	 */
 	hashBase64(): string {
-		this.#hashBase64 ??= Buffer.from(this.hashBase16(), "hex").toString("base64");
+		this.#hashBase64 ??= this.hashBuffer().toString("base64");
 		return this.#hashBase64;
 	}
 	/**
@@ -96,7 +96,7 @@ export class Adler32 {
 	 * @returns {string}
 	 */
 	hashBase64URL(): string {
-		this.#hashBase64URL ??= Buffer.from(this.hashBase16(), "hex").toString("base64url");
+		this.#hashBase64URL ??= this.hashBuffer().toString("base64url");
 		return this.#hashBase64URL;
 	}
 	/**
@@ -111,6 +111,13 @@ export class Adler32 {
 	 * @returns {bigint}
 	 */
 	hashBigInteger: () => bigint = this.hashBigInt;
+	/**
+	 * Get the checksum of the data, in Buffer.
+	 * @returns {Buffer}
+	 */
+	hashBuffer(): Buffer {
+		return Buffer.from(this.hashBase16(), "hex");
+	}
 	/**
 	 * Get the checksum of the data, in hex/hexadecimal without padding.
 	 * @returns {string}

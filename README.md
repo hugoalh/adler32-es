@@ -65,6 +65,7 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     hashBase64(): string;
     hashBase64URL(): string;
     hashBigInt(): bigint;
+    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
     hashNumber(): number;
