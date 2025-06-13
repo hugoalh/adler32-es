@@ -1,4 +1,3 @@
-//deno-lint-ignore-file hugoalh/no-character-ambiguous hugoalh/no-character-invisible
 import { deepStrictEqual } from "node:assert";
 import { Adler32 } from "./mod.ts";
 Deno.test("Raw 1", { permissions: "none" }, () => {
