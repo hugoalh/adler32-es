@@ -109,6 +109,7 @@ export class Adler32 {
 	/**
 	 * Get the checksum of the data, in big integer.
 	 * @returns {bigint}
+	 * @deprecated Use method {@linkcode Adler32.hashBigInt} instead.
 	 */
 	hashBigInteger: () => bigint = this.hashBigInt;
 	/**
@@ -135,6 +136,7 @@ export class Adler32 {
 	/**
 	 * Get the checksum of the data, in number.
 	 * @returns {number}
+	 * @deprecated
 	 */
 	hashNumber(): number {
 		return Number(this.hash());
@@ -146,7 +148,8 @@ export class Adler32 {
 	 */
 	update(data: Adler32AcceptDataType): this {
 		this.#clearStorage();
-		for (const byte of ((typeof data === "string") ? new TextEncoder().encode(data) : data)) {
+		const dataFmt: Exclude<Adler32AcceptDataType, string> = (typeof data === "string") ? new TextEncoder().encode(data) : data;
+		for (const byte of dataFmt) {
 			this.#a = (this.#a + BigInt(byte)) % 65521n;
 			this.#b = (this.#b + this.#a) % 65521n;
 		}

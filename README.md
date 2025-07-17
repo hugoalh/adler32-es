@@ -68,7 +68,6 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
-    hashNumber(): number;
     update(data: Adler32AcceptDataType): this;
     static fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32>;
   }
