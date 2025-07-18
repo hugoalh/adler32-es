@@ -1,4 +1,9 @@
-export type Adler32AcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
+export type Adler32AcceptDataType =
+	| string
+	| BigUint64Array
+	| Uint8Array
+	| Uint16Array
+	| Uint32Array;
 /**
  * Get the checksum of the data with algorithm Adler32.
  */
@@ -16,7 +21,7 @@ export class Adler32 {
 	#b: bigint = 0n;
 	/**
 	 * Initialize.
-	 * @param {Adler32AcceptDataType} [data] Data. Can append later via the method {@linkcode Adler32.update}.
+	 * @param {Adler32AcceptDataType} [data] Data. Can append later via the method {@linkcode Adler32.update} and {@linkcode Adler32.updateFromStream}.
 	 */
 	constructor(data?: Adler32AcceptDataType) {
 		if (typeof data !== "undefined") {
