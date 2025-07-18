@@ -71,7 +71,7 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
   }
   ```
 - ```ts
-  type Adler32AcceptDataType = 
+  type Adler32AcceptDataType =
     | string
     | BigUint64Array
     | Uint8Array
