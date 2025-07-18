@@ -62,14 +62,12 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     hashBase16(): string;
     hashBase32Hex(): string;
     hashBase36(): string;
-    hashBase64(): string;
-    hashBase64URL(): string;
     hashBigInt(): bigint;
-    hashBuffer(): Buffer;
     hashHex(): string;
     hashHexPadding(): string;
+    hashUint8Array(): Uint8Array;
     update(data: Adler32AcceptDataType): this;
-    static fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32>;
+    updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this>;
   }
   ```
 - ```ts

@@ -1,4 +1,3 @@
-import { Buffer } from "node:buffer";
 export type Adler32AcceptDataType = string | BigUint64Array | Uint8Array | Uint16Array | Uint32Array;
 /**
  * Get the checksum of the data with algorithm Adler32.
@@ -12,8 +11,7 @@ export class Adler32 {
 	#hashBase16: string | null = null;
 	#hashBase32Hex: string | null = null;
 	#hashBase36: string | null = null;
-	#hashBase64: string | null = null;
-	#hashBase64URL: string | null = null;
+	#hashUint8Array: Uint8Array | null = null;
 	#a: bigint = 1n;
 	#b: bigint = 0n;
 	/**
@@ -33,8 +31,7 @@ export class Adler32 {
 		this.#hashBase16 = null;
 		this.#hashBase32Hex = null;
 		this.#hashBase36 = null;
-		this.#hashBase64 = null;
-		this.#hashBase64URL = null;
+		this.#hashUint8Array = null;
 	}
 	/**
 	 * Whether the instance is freezed.
@@ -84,40 +81,11 @@ export class Adler32 {
 		return this.#hashBase36;
 	}
 	/**
-	 * Get the checksum of the data, in Base64.
-	 * @returns {string}
-	 */
-	hashBase64(): string {
-		this.#hashBase64 ??= this.hashBuffer().toString("base64");
-		return this.#hashBase64;
-	}
-	/**
-	 * Get the checksum of the data, in Base64URL.
-	 * @returns {string}
-	 */
-	hashBase64URL(): string {
-		this.#hashBase64URL ??= this.hashBuffer().toString("base64url");
-		return this.#hashBase64URL;
-	}
-	/**
 	 * Get the checksum of the data, in big integer.
 	 * @returns {bigint}
 	 */
 	hashBigInt(): bigint {
 		return this.hash();
-	}
-	/**
-	 * Get the checksum of the data, in big integer.
-	 * @returns {bigint}
-	 * @deprecated Use method {@linkcode Adler32.hashBigInt} instead.
-	 */
-	hashBigInteger: () => bigint = this.hashBigInt;
-	/**
-	 * Get the checksum of the data, in Buffer.
-	 * @returns {Buffer}
-	 */
-	hashBuffer(): Buffer {
-		return Buffer.from(this.hashBase16(), "hex");
 	}
 	/**
 	 * Get the checksum of the data, in hex/hexadecimal without padding.
@@ -134,12 +102,22 @@ export class Adler32 {
 		return this.hashHex().padStart(8, "0");
 	}
 	/**
-	 * Get the checksum of the data, in number.
-	 * @returns {number}
-	 * @deprecated
+	 * Get the checksum of the data, in Uint8Array.
+	 * @returns {Uint8Array}
 	 */
-	hashNumber(): number {
-		return Number(this.hash());
+	hashUint8Array(): Uint8Array {
+		if (this.#hashUint8Array === null) {
+			const hex: string = this.hashHex();
+			const hexFmt: string = (hex.length % 2 === 0) ? hex : `0${hex}`;
+			const bytes: string[] = [];
+			for (let index: number = 0; index < hexFmt.length; index += 2) {
+				bytes.push(hexFmt.slice(index, index + 2));
+			}
+			this.#hashUint8Array = Uint8Array.from(bytes.map((byte: string): number => {
+				return Number.parseInt(byte, 16);
+			}));
+		}
+		return Uint8Array.from(this.#hashUint8Array);
 	}
 	/**
 	 * Append data.
@@ -156,16 +134,15 @@ export class Adler32 {
 		return this;
 	}
 	/**
-	 * Initialize from the readable stream.
+	 * Append data from the readable stream.
 	 * @param {ReadableStream<Adler32AcceptDataType>} stream Readable stream.
-	 * @returns {Promise<Adler32>}
+	 * @returns {Promise<this>}
 	 */
-	static async fromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<Adler32> {
-		const instance: Adler32 = new this();
+	async updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this> {
 		for await (const chunk of stream) {
-			instance.update(chunk);
+			this.update(chunk);
 		}
-		return instance;
+		return this;
 	}
 }
 export default Adler32;
