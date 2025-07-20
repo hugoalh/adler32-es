@@ -140,11 +140,11 @@ export class Adler32 {
 	}
 	/**
 	 * Append data from the readable stream.
-	 * @param {ReadableStream<Adler32AcceptDataType>} stream Readable stream.
+	 * @param {ReadableStream<Adler32AcceptDataType>} stream Data from the readable stream.
 	 * @returns {Promise<this>}
 	 */
 	async updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this> {
-		for await (const chunk of stream) {
+		for await (const chunk of stream.pipeThrough(new TextEncoderStream())) {
 			this.update(chunk);
 		}
 		return this;
