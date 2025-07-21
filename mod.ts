@@ -144,8 +144,7 @@ export class Adler32 {
 	 * @returns {Promise<this>}
 	 */
 	async updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this> {
-		const streamFmt: ReadableStream<Uint8Array> = stream.pipeThrough(new TextEncoderStream());
-		for await (const chunk of streamFmt) {
+		for await (const chunk of stream) {
 			this.update(chunk);
 		}
 		return this;
