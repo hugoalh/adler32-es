@@ -60,11 +60,8 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     freeze(): this;
     hash(): bigint;
     hashBase16(): string;
-    hashBase32Hex(): string;
-    hashBase36(): string;
     hashBigInt(): bigint;
     hashHex(): string;
-    hashHexPadding(): string;
     hashUint8Array(): Uint8Array;
     update(data: Adler32AcceptDataType): this;
     updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this>;
@@ -87,6 +84,6 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
 ## ✍️ Examples
 
 - ```ts
-  new Adler32("Wikipedia").hashHexPadding();
+  new Adler32("Wikipedia").hashHex();
   //=> "11E60398"
   ```

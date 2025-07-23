@@ -1,16 +1,16 @@
 import { deepStrictEqual } from "node:assert";
 import { Adler32 } from "./mod.ts";
 Deno.test("Text 1", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("").hashHexPadding(), "00000001");
+	deepStrictEqual(new Adler32("").hashHex(), "00000001");
 });
 Deno.test("Text 2", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("GitHub").hashHexPadding(), "07B10244");
+	deepStrictEqual(new Adler32("GitHub").hashHex(), "07B10244");
 });
 Deno.test("Text 3", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("Wikipedia").hashHexPadding(), "11E60398");
+	deepStrictEqual(new Adler32("Wikipedia").hashHex(), "11E60398");
 });
 Deno.test("Text 4", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("✔️❌").hashHexPadding(), "20C10654");
+	deepStrictEqual(new Adler32("✔️❌").hashHex(), "20C10654");
 });
 Deno.test("Text 5", { permissions: "none" }, () => {
 	const sample = "foo bar baz٪☃🍣";
@@ -26,7 +26,7 @@ Eirmod et sanctus imperdiet veniam sadipscing rebum tempor consetetur amet. Dolo
 
 Et ipsum nonumy kasd facilisis et rebum dolor diam liber dolor et nulla. Ut duo ex ut consetetur dolore illum suscipit sadipscing voluptua odio tation dolor consetetur sit dolor sed et justo. Quis ullamcorper ad.
 
-Sadipscing est voluptua rebum sanctus doming nulla duis et sanctus tempor eos tation takimata. Sit kasd no stet at sed eos justo dolore nulla. Et dolor in erat stet lorem nulla takimata nobis nibh est elitr eirmod aliquyam sed. Stet eirmod aliquyam at et. Sadipscing sed blandit ipsum consequat. Accusam aliquip invidunt at ad vero voluptua dolores accusam.`).hashHexPadding(), "75F000A9");
+Sadipscing est voluptua rebum sanctus doming nulla duis et sanctus tempor eos tation takimata. Sit kasd no stet at sed eos justo dolore nulla. Et dolor in erat stet lorem nulla takimata nobis nibh est elitr eirmod aliquyam sed. Stet eirmod aliquyam at et. Sadipscing sed blandit ipsum consequat. Accusam aliquip invidunt at ad vero voluptua dolores accusam.`).hashHex(), "75F000A9");
 });
 Deno.test("Stream 1", {
 	permissions: {
