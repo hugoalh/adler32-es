@@ -45,24 +45,6 @@ export class Adler32 {
 	 * @returns {Uint8Array}
 	 */
 	hash(): Uint8Array {
-		return this.hashUint8Array();
-	}
-	/**
-	 * Get the checksum of the data, in hexadecimal with padding.
-	 * @returns {string}
-	 */
-	hashHex(): string {
-		this.#hashHex ??= (this.#b * 65536n + this.#a).toString(16).toUpperCase().padStart(8, "0");
-		if (this.#hashHex.length !== 8) {
-			throw new Error(`Unexpected hash hex result \`${this.#hashHex}\`! Please submit a bug report.`);
-		}
-		return this.#hashHex;
-	}
-	/**
-	 * Get the checksum of the data, in Uint8Array.
-	 * @returns {Uint8Array}
-	 */
-	hashUint8Array(): Uint8Array {
 		if (this.#hashUint8Array === null) {
 			const hex: string = this.hashHex();
 			const bytes: string[] = [];
@@ -74,6 +56,17 @@ export class Adler32 {
 			}));
 		}
 		return Uint8Array.from(this.#hashUint8Array);
+	}
+	/**
+	 * Get the checksum of the data, in hexadecimal with padding.
+	 * @returns {string}
+	 */
+	hashHex(): string {
+		this.#hashHex ??= (this.#b * 65536n + this.#a).toString(16).toUpperCase().padStart(8, "0");
+		if (this.#hashHex.length !== 8) {
+			throw new Error(`Unexpected hash hex result \`${this.#hashHex}\`! Please submit a bug report.`);
+		}
+		return this.#hashHex;
 	}
 	/**
 	 * Append data.

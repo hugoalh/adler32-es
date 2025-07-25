@@ -60,7 +60,6 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     freeze(): this;
     hash(): Uint8Array;
     hashHex(): string;
-    hashUint8Array(): Uint8Array;
     update(data: Adler32AcceptDataType): this;
     updateFromStream(stream: ReadableStream<Adler32AcceptDataType>): Promise<this>;
   }
