@@ -12,8 +12,7 @@ export class Adler32 {
 		return "Adler32";
 	}
 	#freezed: boolean = false;
-	#hash: bigint | null = null;
-	#hashBase16: string | null = null;
+	#hashHex: string | null = null;
 	#hashUint8Array: Uint8Array | null = null;
 	#a: bigint = 1n;
 	#b: bigint = 0n;
@@ -25,14 +24,6 @@ export class Adler32 {
 		if (typeof data !== "undefined") {
 			this.update(data);
 		}
-	}
-	#clearStorage(): void {
-		if (this.#freezed) {
-			throw new Error(`Instance is freezed!`);
-		}
-		this.#hash = null;
-		this.#hashBase16 = null;
-		this.#hashUint8Array = null;
 	}
 	/**
 	 * Whether the instance is freezed.
@@ -50,34 +41,22 @@ export class Adler32 {
 		return this;
 	}
 	/**
-	 * Get the checksum of the data, in original format.
-	 * @returns {bigint}
+	 * Get the checksum of the data, in Uint8Array.
+	 * @returns {Uint8Array}
 	 */
-	hash(): bigint {
-		this.#hash ??= this.#b * 65536n + this.#a;
-		return this.#hash;
-	}
-	/**
-	 * Get the checksum of the data, in Base16.
-	 * @returns {string}
-	 */
-	hashBase16(): string {
-		this.#hashBase16 ??= this.hashBigInt().toString(16).toUpperCase();
-		return this.#hashBase16;
-	}
-	/**
-	 * Get the checksum of the data, in big integer.
-	 * @returns {bigint}
-	 */
-	hashBigInt(): bigint {
-		return this.hash();
+	hash(): Uint8Array {
+		return this.hashUint8Array();
 	}
 	/**
 	 * Get the checksum of the data, in hexadecimal with padding.
 	 * @returns {string}
 	 */
 	hashHex(): string {
-		return this.hashBase16().padStart(8, "0");
+		this.#hashHex ??= (this.#b * 65536n + this.#a).toString(16).toUpperCase().padStart(8, "0");
+		if (this.#hashHex.length !== 8) {
+			throw new Error(`Unexpected hash hex result \`${this.#hashHex}\`! Please submit a bug report.`);
+		}
+		return this.#hashHex;
 	}
 	/**
 	 * Get the checksum of the data, in Uint8Array.
@@ -86,10 +65,9 @@ export class Adler32 {
 	hashUint8Array(): Uint8Array {
 		if (this.#hashUint8Array === null) {
 			const hex: string = this.hashHex();
-			const hexFmt: string = (hex.length % 2 === 0) ? hex : `0${hex}`;
 			const bytes: string[] = [];
-			for (let index: number = 0; index < hexFmt.length; index += 2) {
-				bytes.push(hexFmt.slice(index, index + 2));
+			for (let index: number = 0; index < hex.length; index += 2) {
+				bytes.push(hex.slice(index, index + 2));
 			}
 			this.#hashUint8Array = Uint8Array.from(bytes.map((byte: string): number => {
 				return Number.parseInt(byte, 16);
@@ -103,7 +81,11 @@ export class Adler32 {
 	 * @returns {this}
 	 */
 	update(data: Adler32AcceptDataType): this {
-		this.#clearStorage();
+		if (this.#freezed) {
+			throw new Error(`Instance is freezed!`);
+		}
+		this.#hashHex = null;
+		this.#hashUint8Array = null;
 		const dataFmt: Exclude<Adler32AcceptDataType, string> = (typeof data === "string") ? new TextEncoder().encode(data) : data;
 		for (const byte of dataFmt) {
 			this.#a = (this.#a + BigInt(byte)) % 65521n;

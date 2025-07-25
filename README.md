@@ -58,9 +58,7 @@ An ECMAScript (JavaScript & TypeScript) module to get the checksum of the data w
     constructor(data?: Adler32AcceptDataType);
     get freezed(): boolean;
     freeze(): this;
-    hash(): bigint;
-    hashBase16(): string;
-    hashBigInt(): bigint;
+    hash(): Uint8Array;
     hashHex(): string;
     hashUint8Array(): Uint8Array;
     update(data: Adler32AcceptDataType): this;
