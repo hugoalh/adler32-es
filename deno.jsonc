@@ -46,19 +46,11 @@
 		},
 		"jsr-path-manifest": {
 			"command": "echo \"jsr.jsonc\"",
-			"description": "Get JSR manifest file path."
+			"description": "Get JSR manifest (relative file) path."
 		},
 		"jsr-publish": {
-			"command": "deno task jsr-publish-provenance-true || deno task jsr-publish-provenance-false",
-			"description": "Publish package to JSR."
-		},
-		"jsr-publish-provenance-false": {
-			"command": "deno publish --allow-dirty --allow-slow-types --config $(deno task jsr-path-manifest) --no-provenance",
-			"description": "Publish package to JSR without provenance."
-		},
-		"jsr-publish-provenance-true": {
 			"command": "deno publish --allow-dirty --allow-slow-types --config $(deno task jsr-path-manifest)",
-			"description": "Publish package to JSR with provenance."
+			"description": "Publish package to JSR."
 		},
 		"npm-build": {
 			"command": "deno run --allow-all --no-prompt --quiet .dnt.ts",
@@ -69,20 +61,16 @@
 			"description": "Check package for NPM."
 		},
 		"npm-path-root": {
-			"command": "echo \"$INIT_CWD/dist/npm\"",
-			"description": "Get NPM root path."
+			"command": "deno eval --no-config --no-lock --no-npm --no-remote \"import { join as joinPath } from \\\"node:path\\\"; console.log(joinPath(Deno.env.get(\\\"INIT_CWD\\\"), \\\"dist/npm\\\"));\"",
+			"description": "Get NPM root (absolute directory) path."
 		},
 		"npm-publish": {
-			"command": "deno task npm-publish-provenance-true || deno task npm-publish-provenance-false",
+			"command": "deno task --cwd $(deno task npm-path-root) --eval $(deno task npm-publish-command)",
 			"description": "Publish package to NPM."
 		},
-		"npm-publish-provenance-false": {
-			"command": "deno task --cwd $(deno task npm-path-root) --eval \"npm publish --tag publish",
-			"description": "Publish package to NPM without provenance."
-		},
-		"npm-publish-provenance-true": {
-			"command": "deno task --cwd $(deno task npm-path-root) --eval \"npm publish --provenance --tag publish",
-			"description": "Publish package to NPM with provenance."
+		"npm-publish-command": {
+			"command": "deno eval --no-config --no-lock --no-npm --no-remote \"console.log((Deno.env.get(\\\"GITHUB_ACTIONS\\\") === \\\"true\\\" && Deno.env.get(\\\"RUNNER_ENVIRONMENT\\\") === \\\"github-hosted\\\") ? \\\"npm publish --provenance --tag publish\\\" : \\\"npm publish --tag publish\\\" );\"",
+			"description": "Get command for publish package to NPM."
 		}
 	},
 	"unstable": [

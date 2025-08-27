@@ -62,7 +62,11 @@ jobs:
         run: |-
           [PSCustomObject]$Config = ConvertFrom-Json -InputObject (Get-Content -LiteralPath '.\deno.jsonc' -Raw -Encoding 'UTF8NoBOM') -Depth 100
           [Boolean]$JSRDeploy = $Null -ine $Config.tasks.'jsr-check' -and $Null -ine $Config.tasks.'jsr-path-manifest' -and $Null -ine $Config.tasks.'jsr-publish'
-          [Boolean]$NPMDeploy = $Null -ine $Config.tasks.'npm-build' -and $Null -ine $Config.tasks.'npm-check' -and $Null -ine $Config.tasks.'npm-path-root' -and $Null -ine $Config.tasks.'npm-publish'
+          [Boolean]$NPMDeploy = $Null -ine $Config.tasks.'npm-build' -and $Null -ine $Config.tasks.'npm-check' -and $Null -ine $Config.tasks.'npm-path-root' -and $Null -ine $Config.tasks.'npm-publish' -and $Null -ine $Config.tasks.'npm-publish-command'
+          [String]$NPMDeployCommand = $NPMDeploy ? (
+            deno task npm-publish-command |
+              Join-String -Separator "`n"
+          ).Trim() : ''
           Add-Content -LiteralPath $Env:GITHUB_ENV -Value "CDV_BUILD=$(($Null -ine $Config.tasks.build).ToString().ToLower())"
           Add-Content -LiteralPath $Env:GITHUB_ENV -Value "CDV_JSR_DEPLOY=$($JSRDeploy.ToString().ToLower())"
           Add-Content -LiteralPath $Env:GITHUB_ENV -Value "CDV_NPM_DEPLOY=$($NPMDeploy.ToString().ToLower())"
@@ -71,6 +75,7 @@ jobs:
           
           - **JSR:** $($JSRDeploy ? '✔️' : '❌')
           - **NPM:** $($NPMDeploy ? '✔️' : '❌')
+            - **Provenance:** $($NPMDeployCommand -match 'provenance' ? '✔️' : '❌')
           "@
       - name: "Check Repository"
         if: "${{!cancelled() && steps.analyze.outcome == 'success' && env.CDV_RUN_LITE == 'false'}}"
