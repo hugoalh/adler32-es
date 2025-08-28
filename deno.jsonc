@@ -41,36 +41,44 @@
 	"lock": false,
 	"tasks": {
 		"jsr-check": {
-			"command": "deno publish --allow-dirty --config $(deno task jsr-path-manifest) --dry-run --no-provenance",
+			"command": "deno publish --allow-dirty --config $(deno task jsr-var-manifest-relative) --dry-run --no-provenance",
 			"description": "Check package for JSR."
 		},
-		"jsr-path-manifest": {
-			"command": "echo \"jsr.jsonc\"",
-			"description": "Get JSR manifest (relative file) path."
-		},
 		"jsr-publish": {
-			"command": "deno publish --allow-dirty --allow-slow-types --config $(deno task jsr-path-manifest)",
+			"command": "deno publish --allow-dirty --config $(deno task jsr-var-manifest-relative)",
 			"description": "Publish package to JSR."
+		},
+		"jsr-var-manifest-relative": {
+			"command": "echo \"jsr.jsonc\"",
+			"description": "Variable of the JSR manifest file relative path."
 		},
 		"npm-build": {
 			"command": "deno run --allow-all --no-prompt --quiet .dnt.ts",
 			"description": "Build package for NPM."
 		},
 		"npm-check": {
-			"command": "deno task --cwd $(deno task npm-path-root) --eval \"npm publish --dry-run\"",
+			"command": "deno task --cwd $(deno task npm-var-distribution-absolute) --eval $(deno task npm-check-raw)",
 			"description": "Check package for NPM."
 		},
-		"npm-path-root": {
-			"command": "deno eval --no-config --no-lock --no-npm --no-remote \"import { join as joinPath } from \\\"node:path\\\"; console.log(joinPath(Deno.env.get(\\\"INIT_CWD\\\"), \\\"dist/npm\\\"));\"",
-			"description": "Get NPM root (absolute directory) path."
+		"npm-check-raw": {
+			"command": "npm publish --dry-run",
+			"description": "Check package for NPM."
 		},
 		"npm-publish": {
-			"command": "deno task --cwd $(deno task npm-path-root) --eval $(deno task npm-publish-command)",
+			"command": "deno task --cwd $(deno task npm-var-distribution-absolute) --eval $(deno task npm-publish-raw)",
 			"description": "Publish package to NPM."
 		},
-		"npm-publish-command": {
-			"command": "deno eval --no-config --no-lock --no-npm --no-remote \"console.log((Deno.env.get(\\\"GITHUB_ACTIONS\\\") === \\\"true\\\" && Deno.env.get(\\\"RUNNER_ENVIRONMENT\\\") === \\\"github-hosted\\\") ? \\\"npm publish --provenance --tag publish\\\" : \\\"npm publish --tag publish\\\" );\"",
-			"description": "Get command for publish package to NPM."
+		"npm-publish-raw": {
+			"command": "npm publish --tag publish",
+			"description": "Publish package to NPM."
+		},
+		"npm-var-distribution-absolute": {
+			"command": "deno eval --no-config --no-lock --no-npm --no-remote \"import { join as joinPath } from \\\"node:path\\\"; console.log(joinPath(Deno.env.get(\\\"INIT_CWD\\\"), \\\"$(deno task npm-var-distribution-relative)\\\"));\"",
+			"description": "Variable of the NPM distribution directory absolute path."
+		},
+		"npm-var-distribution-relative": {
+			"command": "echo \"dist/npm\"",
+			"description": "Variable of the NPM distribution directory relative path."
 		}
 	},
 	"unstable": [
