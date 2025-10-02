@@ -57,19 +57,15 @@
 		},
 		"npm-build": {
 			"command": "deno run --allow-all --no-prompt --quiet .npm.build.ts",
-			"description": "Build package for NPM."
+			"description": "Build for NPM."
 		},
 		"npm-check": {
 			"command": "deno task --cwd \"$(deno task npm-var-distribution-relative)\" --eval \"npm publish --dry-run\"",
-			"description": "Check package for NPM."
+			"description": "Check for NPM."
 		},
 		"npm-publish": {
 			"command": "deno task --cwd \"$(deno task npm-var-distribution-relative)\" --eval \"npm publish --tag recent\"",
-			"description": "Publish package to NPM."
-		},
-		"npm-metadata": {
-			"command": "cat \"$(deno task npm-var-distribution-relative)/package.json\"",
-			"description": "Get package metadata for NPM."
+			"description": "Publish to NPM."
 		},
 		"npm-var-distribution-relative": {
 			"command": "echo \"dist/npm\"",
