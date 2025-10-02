@@ -1,19 +1,15 @@
-import {
-	getMetadataFromConfig,
-	invokeDenoNodeJSTransformer
-} from "DNT";
-const configJSR = await getMetadataFromConfig("jsr.jsonc");
+import { invokeDenoNodeJSTransformer } from "DNT";
+import jsrManifest from "./jsr.jsonc" with { type: "json" };
 await invokeDenoNodeJSTransformer({
-	copyAssets: [
+	copyEntries: [
 		"LICENSE.md",
 		"README.md"
 	],
-	entrypoints: configJSR.getExports(),
-	fixInjectedImports: true,
+	entrypointsScript: jsrManifest.exports,
 	generateDeclarationMap: true,
 	metadata: {
-		name: configJSR.getName(),
-		version: configJSR.getVersion(),
+		name: jsrManifest.name,
+		version: jsrManifest.version,
 		description: "A module to get the checksum of the data with algorithm Adler32.",
 		keywords: [
 			"adler32",
