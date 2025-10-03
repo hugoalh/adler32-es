@@ -8,7 +8,7 @@
 
 An ECMAScript module to get the checksum of the data with algorithm Adler32.
 
-## ▶️ Runtimes
+## 🎯 Targets
 
 | **Runtime \\ Source** | **GitHub Raw** | **JSR** | **NPM** |
 |:--|:-:|:-:|:-:|
