@@ -9,7 +9,8 @@
 		"useTabs": true
 	},
 	"imports": { // IMPORTANT: Only for development dependencies!
-		"DNT": "jsr:@hugoalh/deno-nodejs-transformer@^0.8.0"
+		"DNT": "jsr:@hugoalh/deno-nodejs-transformer@^0.8.0",
+		"STD_JSONC": "jsr:@std/jsonc@^1.0.2"
 	},
 	"lint": {
 		"plugins": [
