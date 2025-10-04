@@ -37,7 +37,7 @@ This does not request any runtime permission.
 
 > [!NOTE]
 > - It is recommended to include tag for immutability.
-> - These are not part of the public API hence should not be used:
+> - These are not part of the public APIs hence should not be used:
 >   - Benchmark/Test file (e.g.: `example.bench.ts`, `example.test.ts`).
 >   - Entrypoint name or path include any underscore prefix (e.g.: `_example.ts`, `foo/_example.ts`).
 >   - Identifier/Namespace/Symbol include any underscore prefix (e.g.: `_example`, `Foo._example`).
