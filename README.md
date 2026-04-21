@@ -2,9 +2,10 @@
 
 [**⚖️** MIT](./LICENSE.md)
 
-[![GitHub: hugoalh/adler32-es](https://img.shields.io/github/v/release/hugoalh/adler32-es?label=hugoalh/adler32-es&labelColor=181717&logo=github&logoColor=ffffff&sort=semver&style=flat "GitHub: hugoalh/adler32-es")](https://github.com/hugoalh/adler32-es)
-[![JSR: @hugoalh/adler32](https://img.shields.io/jsr/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=F7DF1E&logo=jsr&logoColor=000000&style=flat "JSR: @hugoalh/adler32")](https://jsr.io/@hugoalh/adler32)
-[![NPM: @hugoalh/adler32](https://img.shields.io/npm/v/@hugoalh/adler32?label=@hugoalh/adler32&labelColor=CB3837&logo=npm&logoColor=ffffff&style=flat "NPM: @hugoalh/adler32")](https://www.npmjs.com/package/@hugoalh/adler32)
+🔗
+[GitHub](https://github.com/hugoalh/adler32-es)
+[JSR](https://jsr.io/@hugoalh/adler32)
+[NPM](https://www.npmjs.com/package/@hugoalh/adler32)
 
 An ECMAScript module to get the checksum of the data with algorithm Adler32.
 
