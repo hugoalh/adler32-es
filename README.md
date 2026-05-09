@@ -4,8 +4,8 @@
 
 🔗
 [GitHub](https://github.com/hugoalh/adler32-es)
-[JSR](https://jsr.io/@hugoalh/adler32)
-[NPM](https://www.npmjs.com/package/@hugoalh/adler32)
+● [JSR](https://jsr.io/@hugoalh/adler32)
+● [NPM](https://www.npmjs.com/package/@hugoalh/adler32)
 
 An ECMAScript module to get the checksum of the data with algorithm Adler32.
 
