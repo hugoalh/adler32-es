@@ -3,7 +3,8 @@
 [**⚖️** MIT](./LICENSE.md)
 
 🔗
-[GitHub](https://github.com/hugoalh/adler32-es)
+[DistBoard @hugoalh](https://hugoalh.github.io/distboard/adler32_ecmascript)
+● [GitHub](https://github.com/hugoalh/adler32-es)
 ● [JSR](https://jsr.io/@hugoalh/adler32)
 ● [NPM](https://www.npmjs.com/package/@hugoalh/adler32)
 
