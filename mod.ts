@@ -1,3 +1,10 @@
+function fallfillUint8ArrayFromHex(hex: string): Uint8Array {
+	const elements: number[] = [];
+	for (let index: number = 0; index < hex.length; index += 2) {
+		elements.push(Number.parseInt(hex.slice(index, index + 2), 16));
+	}
+	return Uint8Array.from(elements);
+}
 export type Adler32AcceptDataType =
 	| string
 	| BigUint64Array
@@ -47,13 +54,7 @@ export class Adler32 {
 	hash(): Uint8Array {
 		if (this.#hashUint8Array === null) {
 			const hex: string = this.hashHex();
-			const bytes: string[] = [];
-			for (let index: number = 0; index < hex.length; index += 2) {
-				bytes.push(hex.slice(index, index + 2));
-			}
-			this.#hashUint8Array = Uint8Array.from(bytes.map((byte: string): number => {
-				return Number.parseInt(byte, 16);
-			}));
+			this.#hashUint8Array = Uint8Array?.fromHex(hex) ?? fallfillUint8ArrayFromHex(hex);
 		}
 		return Uint8Array.from(this.#hashUint8Array);
 	}

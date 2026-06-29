@@ -9,16 +9,24 @@ Deno.test("Lock", { permissions: "none" }, () => {
 	});
 });
 Deno.test("Direct 1", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("").hashHex(), "00000001");
+	const instance = new Adler32("");
+	deepStrictEqual(instance.hashHex(), "00000001");
+	deepStrictEqual(instance.hash(), Uint8Array.from([0x00, 0x00, 0x00, 0x01]));
 });
 Deno.test("Direct 2", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("GitHub").hashHex(), "07B10244");
+	const instance = new Adler32("GitHub");
+	deepStrictEqual(instance.hashHex(), "07B10244");
+	deepStrictEqual(instance.hash(), Uint8Array.from([0x07, 0xB1, 0x02, 0x44]));
 });
 Deno.test("Direct 3", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("Wikipedia").hashHex(), "11E60398");
+	const instance = new Adler32("Wikipedia");
+	deepStrictEqual(instance.hashHex(), "11E60398");
+	deepStrictEqual(instance.hash(), Uint8Array.from([0x11, 0xE6, 0x03, 0x98]));
 });
 Deno.test("Direct 4", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("✔️❌").hashHex(), "20C10654");
+	const instance = new Adler32("✔️❌");
+	deepStrictEqual(instance.hashHex(), "20C10654");
+	deepStrictEqual(instance.hash(), Uint8Array.from([0x20, 0xC1, 0x06, 0x54]));
 });
 Deno.test("Direct 5", { permissions: "none" }, () => {
 	const sample = "foo bar baz٪☃🍣";
