@@ -1,9 +1,6 @@
-function fallfillUint8ArrayFromHex(hex: string): Uint8Array {
-	const elements: number[] = [];
-	for (let index: number = 0; index < hex.length; index += 2) {
-		elements.push(Number.parseInt(hex.slice(index, index + 2), 16));
-	}
-	return Uint8Array.from(elements);
+if (typeof Uint8Array.fromHex === "undefined") {
+	//deno-lint-ignore hugoalh/no-import-dynamic -- Polyfill.
+	await import("npm:es-arraybuffer-base64@^1.1.2/Uint8Array.fromHex/auto");
 }
 export type Adler32AcceptDataType =
 	| string
@@ -52,10 +49,7 @@ export class Adler32 {
 	 * @returns {Uint8Array}
 	 */
 	hash(): Uint8Array {
-		if (this.#hashUint8Array === null) {
-			const hex: string = this.hashHex();
-			this.#hashUint8Array = Uint8Array?.fromHex(hex) ?? fallfillUint8ArrayFromHex(hex);
-		}
+		this.#hashUint8Array ??= Uint8Array.fromHex(this.hashHex());
 		return Uint8Array.from(this.#hashUint8Array);
 	}
 	/**
