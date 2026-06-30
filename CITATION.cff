@@ -7,6 +7,7 @@ authors:
   - name: "HUGOALH"
     alias: "hugoalh"
 repository-code: "https://github.com/hugoalh/adler32-es"
+abstract: "An ECMAScript module to get the checksum of the data with algorithm Adler32."
 keywords:
   - "adler32"
   - "checksum"
