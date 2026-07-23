@@ -40,6 +40,7 @@ This does not request any runtime permission.
 | **Name** | **Path** | **Description** |
 |:--|:--|:--|
 | `.` | `./mod.ts` | Default. |
+| `./cli` | `./cli.ts` | CLI. |
 
 > [!NOTE]
 > - Different runtimes have vary support for the sources and entrypoints, visit the runtime documentation for more information.
@@ -76,9 +77,25 @@ This does not request any runtime permission.
 >   - [Deno CLI `deno doc`](https://docs.deno.com/runtime/reference/cli/doc/)
 >   - [JSR](https://jsr.io/@hugoalh/adler32)
 
+## 🧩 CLIs
+
+- ```powershell
+  adler32 $Context
+  ```
+- ```powershell
+  adler32 --file $FilePath
+  <# 🔀 Unordered Positions: `--file`, `$FilePath` #>
+  ```
+- ```powershell
+  adler32 --stdin
+  ```
+
 ## ✍️ Examples
 
 - ```ts
   new Adler32("Wikipedia").hashHex();
   //=> "11E60398"
+  ```
+- ```powershell
+  adler32 'Wikipedia'
   ```
