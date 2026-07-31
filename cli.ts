@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run
 import { parseArgs } from "jsr:@std/cli@^1.0.32/parse-args";
 import { Adler32 } from "./mod.ts";
 if (!import.meta.main) {
