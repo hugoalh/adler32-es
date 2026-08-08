@@ -1,4 +1,3 @@
-#!/usr/bin/env -S deno run
 import {
 	constants as fsConstants,
 	open as openFile,
