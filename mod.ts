@@ -22,8 +22,14 @@ export class Adler32 {
 	#b: bigint = 0n;
 	/**
 	 * Initialize.
-	 * @param {Adler32AcceptDataType} [data] Data. Can append later via the method {@linkcode Adler32.update} and {@linkcode Adler32.updateFromStream}.
 	 */
+	constructor();
+	/**
+	 * Initialize.
+	 * @param {Adler32AcceptDataType} data Data.
+	 * @deprecated Append data via the method {@linkcode Adler32.update} or {@linkcode Adler32.updateFromStream} instead.
+	 */
+	constructor(data: Adler32AcceptDataType);
 	constructor(data?: Adler32AcceptDataType) {
 		if (typeof data !== "undefined") {
 			this.update(data);

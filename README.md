@@ -40,7 +40,6 @@ This does not request any runtime permission.
 
 - ```ts
   class Adler32 {
-    constructor(data?: Adler32AcceptDataType);
     get freezed(): boolean;
     freeze(): this;
     hash(): Uint8Array;
