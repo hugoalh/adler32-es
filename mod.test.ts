@@ -9,22 +9,22 @@ Deno.test("Lock", { permissions: "none" }, () => {
 	});
 });
 Deno.test("Direct 1", { permissions: "none" }, () => {
-	const instance = new Adler32("");
+	const instance = new Adler32().update("");
 	deepStrictEqual(instance.hashHex(), "00000001");
 	deepStrictEqual(instance.hash(), Uint8Array.from([0x00, 0x00, 0x00, 0x01]));
 });
 Deno.test("Direct 2", { permissions: "none" }, () => {
-	const instance = new Adler32("GitHub");
+	const instance = new Adler32().update("GitHub");
 	deepStrictEqual(instance.hashHex(), "07B10244");
 	deepStrictEqual(instance.hash(), Uint8Array.from([0x07, 0xB1, 0x02, 0x44]));
 });
 Deno.test("Direct 3", { permissions: "none" }, () => {
-	const instance = new Adler32("Wikipedia");
+	const instance = new Adler32().update("Wikipedia");
 	deepStrictEqual(instance.hashHex(), "11E60398");
 	deepStrictEqual(instance.hash(), Uint8Array.from([0x11, 0xE6, 0x03, 0x98]));
 });
 Deno.test("Direct 4", { permissions: "none" }, () => {
-	const instance = new Adler32("✔️❌");
+	const instance = new Adler32().update("✔️❌");
 	deepStrictEqual(instance.hashHex(), "20C10654");
 	deepStrictEqual(instance.hash(), Uint8Array.from([0x20, 0xC1, 0x06, 0x54]));
 });
@@ -36,7 +36,7 @@ Deno.test("Direct 5", { permissions: "none" }, () => {
 	deepStrictEqual(instance.update(sample).hashHex(), "789C1EA0");
 });
 Deno.test("Direct 6", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32(`Aliquam et at at invidunt in. Dolore labore justo ea diam. Labore kasd labore et justo vulputate suscipit soluta eum lorem vel magna gubergren ut qui magna. Diam tempor luptatum et takimata consetetur sit aliquam dolor lorem exerci aliquyam duis. Et sed delenit sea et magna eirmod takimata sit euismod sit. Et dolor consetetur dolor aliquyam duo erat. Dolor et clita takimata sadipscing dolores volutpat ut voluptua. Sit et justo laoreet sed sed sit et vel sit kasd et accumsan tempor te dolor sed. Eu ut diam diam amet elitr labore et sed accusam ea dolores ipsum lorem magna. Nonummy diam liber takimata invidunt diam stet rebum dolores erat. Consetetur luptatum at congue at eirmod aliquyam tempor diam sadipscing dolor eos. At gubergren stet euismod dolores dolores dolor hendrerit eirmod et erat aliquip nonummy dolor dolores elitr. Voluptua eos dolor nobis takimata blandit lorem in nonumy erat sanctus ex elitr te. Dolores erat labore voluptua tincidunt vero.
+	deepStrictEqual(new Adler32().update(`Aliquam et at at invidunt in. Dolore labore justo ea diam. Labore kasd labore et justo vulputate suscipit soluta eum lorem vel magna gubergren ut qui magna. Diam tempor luptatum et takimata consetetur sit aliquam dolor lorem exerci aliquyam duis. Et sed delenit sea et magna eirmod takimata sit euismod sit. Et dolor consetetur dolor aliquyam duo erat. Dolor et clita takimata sadipscing dolores volutpat ut voluptua. Sit et justo laoreet sed sed sit et vel sit kasd et accumsan tempor te dolor sed. Eu ut diam diam amet elitr labore et sed accusam ea dolores ipsum lorem magna. Nonummy diam liber takimata invidunt diam stet rebum dolores erat. Consetetur luptatum at congue at eirmod aliquyam tempor diam sadipscing dolor eos. At gubergren stet euismod dolores dolores dolor hendrerit eirmod et erat aliquip nonummy dolor dolores elitr. Voluptua eos dolor nobis takimata blandit lorem in nonumy erat sanctus ex elitr te. Dolores erat labore voluptua tincidunt vero.
 
 Eirmod et sanctus imperdiet veniam sadipscing rebum tempor consetetur amet. Dolores iusto est in justo quis feugait duis sit esse. Ut sit nulla nulla sit dolore justo sea consequat amet dolor dolor vulputate feugiat amet eos. Ipsum iriure elitr clita accumsan ullamcorper feugait diam feugiat vel et ut. Tation dolores sed no ut gubergren. Ut sed voluptua duo lobortis tempor lobortis in amet dolores stet qui in stet sit amet iriure stet. Exerci illum cum sanctus eleifend ex vero et te stet nostrud erat duis laoreet ipsum eos hendrerit ut.
 
@@ -45,7 +45,7 @@ Et ipsum nonumy kasd facilisis et rebum dolor diam liber dolor et nulla. Ut duo 
 Sadipscing est voluptua rebum sanctus doming nulla duis et sanctus tempor eos tation takimata. Sit kasd no stet at sed eos justo dolore nulla. Et dolor in erat stet lorem nulla takimata nobis nibh est elitr eirmod aliquyam sed. Stet eirmod aliquyam at et. Sadipscing sed blandit ipsum consequat. Accusam aliquip invidunt at ad vero voluptua dolores accusam.`).hashHex(), "75F000A9");
 });
 Deno.test("Direct 7", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("SheetJS").hashHex(), "0A8C0297");
+	deepStrictEqual(new Adler32().update("SheetJS").hashHex(), "0A8C0297");
 });
 Deno.test("Direct 8", { permissions: "none" }, () => {
 	const instance = new Adler32();
@@ -54,23 +54,23 @@ Deno.test("Direct 8", { permissions: "none" }, () => {
 	deepStrictEqual(instance.update("JS").hashHex(), "0A8C0297");
 });
 Deno.test("Direct 9", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("\u2603").hashHex(), "045C01FE");
+	deepStrictEqual(new Adler32().update("\u2603").hashHex(), "045C01FE");
 });
 Deno.test("Direct 10", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("\u0003").hashHex(), "00040004");
+	deepStrictEqual(new Adler32().update("\u0003").hashHex(), "00040004");
 });
 Deno.test("Direct 11", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("\u0000").hashHex(), "00010001");
+	deepStrictEqual(new Adler32().update("\u0000").hashHex(), "00010001");
 });
 Deno.test("Direct 12", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("あいうえお").hashHex(), "4E340993");
+	deepStrictEqual(new Adler32().update("あいうえお").hashHex(), "4E340993");
 });
 Deno.test("Direct 13", { permissions: "none" }, () => {
-	deepStrictEqual(new Adler32("abc").hashHex(), "024D0127");
+	deepStrictEqual(new Adler32().update("abc").hashHex(), "024D0127");
 });
 async function testerStream(filePath: string): Promise<void> {
 	const sampleText = await Deno.readTextFile(filePath);
-	const hashFromText = new Adler32(sampleText).hash();
+	const hashFromText = new Adler32().update(sampleText).hash();
 	await using sampleFile = await Deno.open(filePath);
 	const hashFromStream = (await new Adler32().updateFromStream(sampleFile.readable)).hash();
 	deepStrictEqual(hashFromText, hashFromStream);
