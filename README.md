@@ -84,7 +84,7 @@ This does not request any runtime permission.
 ## ✍️ Examples
 
 - ```ts
-  new Adler32("Wikipedia").hashHex();
+  new Adler32().update("Wikipedia").hashHex();
   //=> "11E60398"
   ```
 - ```powershell
