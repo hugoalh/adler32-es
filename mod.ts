@@ -21,21 +21,6 @@ export class Adler32 {
 	#a: bigint = 1n;
 	#b: bigint = 0n;
 	/**
-	 * Initialize.
-	 */
-	constructor();
-	/**
-	 * Initialize.
-	 * @param {Adler32AcceptDataType} data Data.
-	 * @deprecated Append data via the method {@linkcode Adler32.update} or {@linkcode Adler32.updateFromStream} instead.
-	 */
-	constructor(data: Adler32AcceptDataType);
-	constructor(data?: Adler32AcceptDataType) {
-		if (typeof data !== "undefined") {
-			this.update(data);
-		}
-	}
-	/**
 	 * Whether the instance is freezed.
 	 * @returns {boolean}
 	 */
