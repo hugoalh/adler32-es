@@ -41,6 +41,7 @@ This does not request any runtime permission.
 - ```ts
   class Adler32 {
     get freezed(): boolean;
+    clone(): Adler32;
     freeze(): this;
     hash(): Uint8Array;
     hashHex(): string;

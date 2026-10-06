@@ -28,6 +28,19 @@ export class Adler32 {
 		return this.#freezed;
 	}
 	/**
+	 * Clone the instance.
+	 * @returns {Adler32}
+	 */
+	clone(): Adler32 {
+		const instance: Adler32 = new Adler32();
+		instance.#freezed = this.#freezed;
+		instance.#hashHex = this.#hashHex;
+		instance.#hashUint8Array = this.#hashUint8Array;
+		instance.#a = this.#a;
+		instance.#b = this.#b;
+		return instance;
+	}
+	/**
 	 * Freeze the instance to prevent any further update.
 	 * @returns {this}
 	 */
