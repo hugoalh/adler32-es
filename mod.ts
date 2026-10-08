@@ -56,7 +56,7 @@ export class Adler32 {
 	 */
 	hashHex(): string {
 		if (this.#hashHex === null) {
-			const result: string = (this.#b * 65536n + this.#a).toString(16).toUpperCase().padStart(8, "0");
+			const result: string = ((this.#b << 16n) | this.#a).toString(16).toUpperCase().padStart(8, "0");
 			if (result.length !== 8) {
 				throw new Error(`Unexpected hash hex result \`${result}\`! Please submit a bug report.`);
 			}
